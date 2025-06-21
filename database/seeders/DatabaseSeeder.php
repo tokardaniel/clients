@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Database\Seeders\CarSeeder;
+use Database\Seeders\ClientSeeder;
+use Database\Seeders\ServiceSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,11 +14,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $clientSeeder = new ClientSeeder();
+        $carSeeder = new CarSeeder();
+        $serviceSeeder = new ServiceSeeder();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        $clientSeeder->run();
+        $carSeeder->run();
+        $serviceSeeder->run();
     }
 }

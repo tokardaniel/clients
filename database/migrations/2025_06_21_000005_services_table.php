@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('client_id');
             $table->foreignId('car_id');
-            $table->integer('log_number')->unique();
+            $table->integer('log_number');
             $table->string('event');
-            $table->date('event_time');
+            $table->date('event_time')->nullable();
             $table->integer('document_id');
             $table->foreign('client_id')
                 ->references('id')
