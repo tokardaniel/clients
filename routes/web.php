@@ -1,10 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Services\ClientServices;
+use App\Http\Controllers\ClientController;
 
-Route::get('/', function (ClientServices $clientServices): \Illuminate\View\View {
-    return view('clients', data: [
-        'clients' => $clientServices->getAllClients(),
-    ]);
-});
+Route::get('/', [ClientController::class, 'index']);
