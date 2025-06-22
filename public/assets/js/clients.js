@@ -3,6 +3,7 @@
 
     let cars_table_contaier = null;
     let spinner_div = null;
+    let services_table_container = null;
     let nameOfCarColumns = ['autó sorszáma', 'autó típusa', 'regisztrálás időpontja', 'saját márkás', 'balesetek száma', 'legutolsó legsúlyosabb szervízbejegyzés', 'legutolsó szervízbejegyzés ideje'];
 
     async function showCars(e) {
@@ -24,19 +25,41 @@
     document.addEventListener('DOMContentLoaded', async () => {
         cars_table_contaier = document.getElementById('cars_table_container');
         spinner_div = document.getElementById('spinner_div');
+        services_table_container = document.getElementById('services_table_container');
         const tds = document.getElementsByClassName('td_client_name');
         for (td of tds) {
             td.addEventListener('click', (e) => showCars(e));
         }
-
     });
 
-    function href_click(e) {
+    function show_services(e) {
         const car_id = e.target.id;
+        services_table_container.style.display = 'block';
+
+        if ($.fn.DataTable.isDataTable('#services_data_tables')) {
+            $('#services_data_tables').DataTable().clear().destroy();
+        }
+
+        new DataTable('#services_data_tables', {
+            ajax: {
+                url: `/car/${car_id}`,
+                dataSrc: (json) => {
+                    return json.services;
+                },
+            },
+            columns: [
+                { data: 'log_number' },
+                { data: 'event' },
+                { data: 'event_time' },
+                { data: 'document_id' }
+            ],
+            order: [[2, 'desc']]
+        });
     }
 
     function drawTable(client) {
         cars_table_contaier.innerHTML = '';
+        services_table_container.style.display = 'none';
         if (client.cars.length === 0) {
             cars_table_contaier.innerHTML = '<p class="text-center">Nincs autó az ügyfélhez rendelve</p>';
             return;
@@ -60,7 +83,7 @@
             id_href.setAttribute('href', 'javascript:void(0)');
             id_href.setAttribute('id', car.id);
             id_href.innerHTML = car.id;
-            id_href.addEventListener('click', (e) => href_click(e));
+            id_href.addEventListener('click', (e) => show_services(e));
             td_id.appendChild(id_href);
             tr.appendChild(td_id);
             for (value of Object.values(car).slice(1)) {

@@ -31,5 +31,18 @@
     {{ $clients->onEachSide(5)->links() }}
 
     <div id="cars_table_container"></div>
+
+    <div id="services_table_container" style="display: none">
+        <table id="services_data_tables" class="display">
+            <thead>
+                <tr>
+                    <th>alkalom sorszáma</th>
+                    <th>esemény neve</th>
+                    <th>esemény időpontja</th>
+                    <th>munkalap azonosító</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
 </div>
 @endsection
