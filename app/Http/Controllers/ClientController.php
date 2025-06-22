@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\View\View;
 
 use \App\Services\ClientServices;
-use App\Models\Service;
+use App\Models\Client;
 
 class ClientController extends Controller {
     public function __construct(private ClientServices $clientServices) {
@@ -24,5 +24,12 @@ class ClientController extends Controller {
         return $this->clientServices->getClientDataById($id);
     }
 
+    public function getClientByName(String $name): array | Client {
+        return $this->clientServices->getClientByName($name);
+    }
+
+    public function getClientByPersonalId(String $id): array | Client {
+        return $this->clientServices->getClientByPersonalId($id);
+    }
 
 }

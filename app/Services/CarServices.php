@@ -14,7 +14,7 @@ class CarServices {
         $car = $this->getCarById($id);
 
         $services = [];
-        foreach ($car?->services()->get() as $service) {
+        foreach ($car->services()->get() as $service) {
             $services[] = [
                 'log_number' => $service->log_number,
                 'event' => $service->event,
@@ -35,7 +35,7 @@ class CarServices {
     }
 
     private function getCarById(int $id): ?Car {
-        return $this->car->find($id)->first();
+        return $this->car->where('id', '=', $id)->first();
     }
 
 }

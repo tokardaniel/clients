@@ -13,11 +13,11 @@ class Client extends Model
 
     public function cars(): HasMany
     {
-        return $this->hasMany(Car::class);
+        return $this->hasMany(Car::class, 'client_id', 'id');
     }
 
     public function services(): HasMany
     {
-        return $this->hasMany(Service::class);
+        return $this->hasMany(Service::class, 'client_id', 'id');
     }
 }

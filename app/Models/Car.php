@@ -13,6 +13,6 @@ class Car extends Model
 
     public function services(): HasMany
     {
-        return $this->hasMany(Service::class)->orderBy('event_time', 'desc');
+        return $this->hasMany(Service::class, 'car_id', 'id');
     }
 }
