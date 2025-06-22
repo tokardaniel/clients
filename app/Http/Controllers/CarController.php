@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\CarServices;
+use App\Services\CarService;
 
 class CarController extends Controller
 {
-    function __construct(private CarServices $carServices) {
-        $this->carServices = $carServices;
+    function __construct(private CarService $carService) {
+        $this->carService = $carService;
     }
 
     public function getCarById(int $id): ?Array {
-        return $this->carServices->getCarDataById($id);
+        return $this->carService->getCarDataById($id);
     }
 }

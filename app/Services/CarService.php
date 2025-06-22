@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Models\Car;
 
-class CarServices {
+class CarService {
 
     public function __construct(private Car $car) {
         $this->car = $car;

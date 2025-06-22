@@ -4,16 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\View\View;
 
-use \App\Services\ClientServices;
+use \App\Services\ClientService;
 use App\Models\Client;
 
 class ClientController extends Controller {
-    public function __construct(private ClientServices $clientServices) {
-        $this->clientServices = $clientServices;
+    public function __construct(private ClientService $clientService) {
+        $this->clientService = $clientService;
     }
 
     public function index(): View {
-        $clients = $this->clientServices->getAllClients();
+        $clients = $this->clientService->getAllClients();
 
         return view('clients', data: [
             'clients' => $clients,
@@ -21,15 +21,15 @@ class ClientController extends Controller {
     }
 
     public function getClientById(int $id): ?Array {
-        return $this->clientServices->getClientDataById($id);
+        return $this->clientService->getClientDataById($id);
     }
 
     public function getClientByName(String $name): array | Client {
-        return $this->clientServices->getClientByName($name);
+        return $this->clientService->getClientByName($name);
     }
 
     public function getClientByPersonalId(String $id): array | Client {
-        return $this->clientServices->getClientByPersonalId($id);
+        return $this->clientService->getClientByPersonalId($id);
     }
 
 }

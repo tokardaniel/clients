@@ -10,7 +10,7 @@ use App\Models\Client;
 use App\Models\Service;
 use Illuminate\Support\Facades\DB;
 
-class ClientServices {
+class ClientService {
 
     private Client $client;
 
